@@ -157,7 +157,7 @@ def convert_templates(text: str) -> str:
     return text
 
 
-def preprocess_text(text, title):
+def preprocess_text(text: str, title: str) -> str:
 
     text = replace_pagename(text, title)
     text = remove_unwanted_sections(text)
