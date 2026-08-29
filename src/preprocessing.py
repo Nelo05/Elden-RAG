@@ -43,8 +43,8 @@ DIALOGUES_TEMPLATE_PATTERN = re.compile(
 
 REMOVE_PATTERN = re.compile(r"без\|мини\|[^\n]*\n?")
 
-ITEMS_TABLE_PATTERN = re.compile(
-    r"## Предметы\s*\{\|.*?\|\}",
+TABLE_PATTERN = re.compile(
+    r"\{\| class=\"wikitable\".*?\|\}",
     flags=re.DOTALL,
 )
 
@@ -141,7 +141,7 @@ def replace_items_table(match: re.Match) -> str:
         return ""
     result_lines = []
     for title, chance in rows:
-        result_lines.append(f"{title.strip()} - {chance.strip()}")
+        result_lines.append(f"- {title.strip()} - Шанс выпадения: {chance.strip()}")
     return "\n".join(result_lines)
 
 
@@ -152,7 +152,7 @@ def convert_templates(text: str) -> str:
     text = ENEMY_TEMPLATE_PATTERN.sub(replace_enemy_template, text)
     text = RESISTANCES_TEMPLATE_PATTERN.sub(replace_resistances, text)
     text = DIALOGUES_TEMPLATE_PATTERN.sub(replace_dialogues, text)
-    text = ITEMS_TABLE_PATTERN.sub(replace_items_table, text)
+    text = TABLE_PATTERN.sub(replace_items_table, text)
 
     return text
 
