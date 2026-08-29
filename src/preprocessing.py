@@ -1,6 +1,6 @@
 import re
 
-URL_LINK_PATTERN = re.compile(r"\[\[(https?://[^\s]+)\s+([^\]]+)\]\]")
+URL_LINK_PATTERN = re.compile(r"\[?\[(https?://[^\s]+)\s+([^\]]+)\]\]?")
 
 WIKI_LINK_WITH_TEXT_PATTERN = re.compile(r"\[\[([^|\]]*)\|([^\]]*)\]\]")
 
