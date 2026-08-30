@@ -21,7 +21,6 @@ class SplitterConfig(BaseSettings):
     @field_validator("headers_to_split_on", mode="before")
     @classmethod
     def parse_headers(cls, v):
-        """Преобразует строку вида '##,chapter;###,section' в список кортежей."""
         if isinstance(v, str):
             headers = []
             for part in v.split(";"):
@@ -36,7 +35,6 @@ class SplitterConfig(BaseSettings):
     @field_validator("allowed_extensions", mode="before")
     @classmethod
     def parse_extensions(cls, v):
-        """Преобразует строку '.md,.txt' в список."""
         if isinstance(v, str):
             return [ext.strip() for ext in v.split(",") if ext.strip()]
         return v
