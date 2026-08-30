@@ -1,1 +1,10 @@
 requests
+pandas
+langchain_text_splitters
+langchain_community
+langchain 
+qdrant-client 
+langchain-qdrant
+pydantic-settings 
+python-dotenv
+fastembed
