@@ -8,3 +8,4 @@ langchain-qdrant
 pydantic-settings 
 python-dotenv
 fastembed
+langchain_huggingface
