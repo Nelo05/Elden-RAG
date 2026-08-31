@@ -59,8 +59,8 @@ class MarkdownProcessor:
             for sub_chunk in sub_splits:
                 if len(sub_chunk.page_content) < self.config.min_chunk_length:
                     continue
-                headers_str = "; ".join(str(v) for v in sub_chunk.metadata.values())
-                sub_chunk.page_content = f"{headers_str}\n{sub_chunk.page_content}"
+                headers_str = f"{sub_chunk.metadata['name']}; {sub_chunk.metadata['chapter']}"
+                sub_chunk.page_content = f"{headers_str}\n\n{sub_chunk.page_content}"
                 chunks.append(sub_chunk)
 
         print(f"Обработан файл {filepath}, создано {len(chunks)} чанков")
