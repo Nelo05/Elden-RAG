@@ -1,5 +1,4 @@
 requests
-pandas
 langchain_text_splitters
 langchain_community
 langchain 
@@ -9,3 +8,4 @@ pydantic-settings
 python-dotenv
 fastembed
 langchain_huggingface
+mwparserfromhell
