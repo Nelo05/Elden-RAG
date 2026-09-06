@@ -44,7 +44,7 @@ class VectorStoreManager:
             return QdrantClient(
                 host=self.qdrant_host,
                 port=self.qdrant_port,
-                grpc_port=self.qdrant_grpc_port
+                grpc_port=self.qdrant_grpc_port,
             )
         else:
             return QdrantClient(path=str(self.qdrant_path))
@@ -88,3 +88,33 @@ class VectorStoreManager:
             search_type=self.search_type,
             search_kwargs={"k": self.top_k},
         )
+
+    def get_resources(self) -> list[dict[str, str]]:
+        resources: dict[str, dict[str, str]] = {}
+        offset = None
+
+        while True:
+            points, offset = self.client.scroll(
+                collection_name=self.collection_name,
+                limit=100,
+                offset=offset,
+                with_payload=True,
+                with_vectors=False,
+            )
+
+            for point in points:
+                metadata = (point.payload or {}).get("metadata", {})
+
+                source = metadata.get("source")
+                title = metadata.get("title")
+
+                if source not in resources.keys():
+                    resources[source] = {
+                        "title": title,
+                        "source": source,
+                    }
+
+            if offset is None:
+                break
+
+        return list(resources.values())

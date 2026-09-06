@@ -53,9 +53,9 @@ class MarkdownProcessor:
 
                 if len(chunk.page_content.strip()) < self.min_chunk_length:
                     continue
-
                 chunk.metadata.update(document.metadata)
-
+                main_headers = f'{chunk.metadata.get("title", "")}; {chunk.metadata.get("chapter", "")}'
+                chunk.page_content = main_headers + "\n\n" + chunk.page_content
                 chunks.append(chunk)
 
         return chunks

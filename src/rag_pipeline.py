@@ -42,8 +42,11 @@ class RAGPipeline:
             response = self.llm.invoke(message)
             return response.content
         except Exception as e:
-            print(f"Ошибка при выполнении запроса: {e}", exc_info=True)
+            print(f"Ошибка при выполнении запроса: {e}")
             return "Произошла ошибка при обработке запроса."
+
+    def get_resources(self) -> list[dict[str, str]]:
+        return self.vector_store.get_resources()
 
     def add_documents(self, url: str) -> None:
         try:
@@ -52,5 +55,5 @@ class RAGPipeline:
             self.vector_store.add_documents(chunks)
             print(f"Добавлено: {len(docs)} документов, включающих {len(chunks)} чанков")
         except Exception as e:
-            print(f"Ошибка при выполнении запроса: {e}", exc_info=True)
+            print(f"Ошибка при выполнении запроса add_documents: {e}")
             return "Произошла ошибка при обработке запроса."

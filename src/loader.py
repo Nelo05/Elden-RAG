@@ -204,7 +204,7 @@ class MediaWikiLoader:
         return f"{base_url}/wiki/{title.replace(' ', '_')}"
 
     def _clean(
-        cls,
+        self,
         text: str,
         title: str,
     ) -> str:
