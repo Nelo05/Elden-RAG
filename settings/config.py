@@ -29,8 +29,7 @@ class AppSettings(BaseSettings):
         default=[".md"], validation_alias="SPLITTER_ALLOWED_EXTENSIONS"
     )
     qdrant_connection_mode: Literal["remote", "local"] = Field(
-        default= "local",
-        validation_alias="VECTORSTORE_CONNECTION_MODE"
+        default="local", validation_alias="VECTORSTORE_CONNECTION_MODE"
     )
     qdrant_path: Path = Field(
         default=PROJECT_ROOT / "qdrant", validation_alias="VECTORSTORE_QDRANT_PATH"
@@ -38,7 +37,9 @@ class AppSettings(BaseSettings):
     qdrant_host: str | None = Field(
         default=None, validation_alias="VECTORSTORE_QDRANT_HOST"
     )
-    qdrant_port: int | None = Field(default=None, validation_alias="VECTORSTORE_QDRANT_PORT")
+    qdrant_port: int | None = Field(
+        default=None, validation_alias="VECTORSTORE_QDRANT_PORT"
+    )
     qdrant_grpc_port: int | None = Field(
         default=None, validation_alias="VECTORSTORE_QDRANT_GRPC_PORT"
     )
@@ -69,7 +70,7 @@ class AppSettings(BaseSettings):
         extra="ignore",
     )
 
-    @model_validator(mode='after')
+    @model_validator(mode="after")
     def validate_connection(self):
         if self.qdrant_connection_mode == "remote":
             if not self.qdrant_host:
@@ -81,7 +82,7 @@ class AppSettings(BaseSettings):
         if self.qdrant_connection_mode == "local" and not self.qdrant_path:
             raise ValueError("Для local-режима необходимо задать qdrant_path")
         return self
-    
+
     @field_validator("qdrant_path", mode="after")
     @classmethod
     def resolve_qdrant_path(cls, path: Path) -> Path:
