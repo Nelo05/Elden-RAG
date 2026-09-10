@@ -1,0 +1,19 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    restart: unless-stopped
+    ports:
+      - "${VECTORSTORE_QDRANT_PORT}:6333"
+
+
+  app:
+    build: .
+    container_name: rag-app
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      - qdrant
+    ports:
+      - "${STREAMLIT_PORT}:8501"

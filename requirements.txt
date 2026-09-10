@@ -1,7 +1,5 @@
 requests
 langchain_text_splitters
-langchain_community
-langchain 
 qdrant-client 
 langchain-qdrant
 pydantic-settings 
@@ -10,3 +8,5 @@ fastembed
 langchain_huggingface
 mwparserfromhell
 streamlit
+langchain_gigachat
+sentence-transformers
